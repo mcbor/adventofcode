@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Advent of Code 2016 - Day 4, Part One
+# Advent of Code 2016 - Day 4, Part Two
 
 import sys
 import string

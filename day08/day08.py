@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
-# Advent of Code 2016 - Day 8, Part One
+# Advent of Code 2016 - Day 8, Part One and Two
 
 import sys
+from itertools import chain
 
-COLS = 7
-ROWS = 3
+COLS = 50
+ROWS = 6
 
 
 def rect(display, x, y):
@@ -15,8 +16,8 @@ def rect(display, x, y):
 
 def rotate_col(display, x, s):
     d = list(zip(*display))
-    rotate_row(d, x, -s)
-    display[:] = list(zip(*d))
+    rotate_row(d, x, s)
+    display[:] = list(map(list, zip(*d)))
 
 
 def rotate_row(display, y, s):
@@ -27,7 +28,7 @@ def main(argv):
     if len(argv) < 2:
         print("Usage: {} puzzle.txt".format(argv[0]))
         return 1
-    display = [['.' for _ in range(COLS)] for _ in range(ROWS)]
+    display = [[' ' for _ in range(COLS)] for _ in range(ROWS)]
     with open(argv[1]) as f:
         for line in f:
             cmd, *args = line.strip().split()
@@ -50,6 +51,7 @@ def main(argv):
                 return 1
             for row in display:
                 print("".join(row))
+    print("".join(chain.from_iterable(display)).count('#'))
     return 0
 
 

@@ -31,13 +31,9 @@ def main(argv):
     with open(argv[1]) as f:
         for line in f:
             nets = re.split('[\[\]]', line.strip())
-            print(nets)
             if any(has_abba(s) for s in nets[::2]) \
                 and not any(has_abba(h) for h in nets[1::2]):
                 valid += 1
-                print('valid')
-            else:
-                print('not')
     print(valid)
     return 0
 

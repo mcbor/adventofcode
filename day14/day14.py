@@ -8,7 +8,7 @@ import sys
 from hashlib import md5
 from itertools import islice, chain
 from collections import defaultdict
-from pprint import pprint
+
 
 def window(seq, n=2):
     "Returns a sliding window (of width n) over data from the iterable"

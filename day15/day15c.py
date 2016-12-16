@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Advent of Code 2016 - Day 15
+# Advent of Code 2016 - Day 15, variant C
 
 import sys
 import re
@@ -12,14 +12,13 @@ def main(argv):
     with open(argv[1]) as f:
         for line in f:
             disc, positions, t0, init = map(int, re.findall(r'(\d+)', line))
-            discs += [(positions, init)]
-    t = 1
-    while True:
-        d = [(init+index+t) % positions for index, (positions, init) in enumerate(discs)]
-        if not any(d):
-            break
-        t += 1
-    print(t-1)
+            discs += [(positions, init + disc)]
+    t = delta = 1
+    for positions, init in discs:
+        while (init + t) % positions != 0:
+            t += delta
+        delta *= positions
+    print(t)
     return 0
 
 if __name__ == '__main__':

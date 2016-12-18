@@ -15,10 +15,11 @@ def main(argv):
             rows = []
             seed = line.strip()
             length = len(seed)
+            mask = 2**length - 1
             row = reduce(or_, ((c == '^') << (length - i - 1) for i, c in enumerate(seed)))
             rows += [row]
             while len(rows) < nrows:
-                rows += [(rows[-1] << 1 ^ rows[-1] >> 1) & (2**length - 1)]
+                rows += [(rows[-1] << 1 ^ rows[-1] >> 1) & mask]
             print(sum('{:0{width}b}'.format(row, width=length).count('0') for row in rows))
     return 0
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Advent of Code 2016 - Day 21, Part One
+# Advent of Code 2016 - Day 21, Part Two
 
 import sys
 import re
@@ -19,16 +19,19 @@ def swap_letter(string, x, y):
     return string
 
 
-def rotate_lr(string, n):
+def rotate_right(string, n):
     n = n % len(string)
     return string[-n:] + string[:-n]
+    
+
+def rotate_left(string, n):
+    return rotate_right(string, -n)
 
 
 def rotate_position(string, x):
     i = string.index(x)
-    n = 1 + i + (i >= 4)
-    return rotate_lr(string, n)
-
+    n = i // 2 + (i % 2 == 1 or i == 0 and 1 or 5)
+    return rotate_left(string, n)
 
 def reverse(string, x, y):
     string[x:y+1] = string[x:y+1][::-1]
@@ -56,8 +59,9 @@ def main(argv):
         print("Usage: {} puzzle.txt".format(argv[0]))
         return 1
     with open(argv[1]) as f:
-        string = list('abcdefgh')
-        for line in f:
+        string = list('fbgdceah')
+        lines = reversed(f.readlines())
+        for line in lines:
             head, tail = line.split(maxsplit=1)
             if head == 'swap':
                 head, tail = tail.split(maxsplit=1)
@@ -71,10 +75,10 @@ def main(argv):
                 head, tail = tail.split(maxsplit=1)
                 if head == 'left':
                     n = list(getints(tail))[0]
-                    string = rotate_lr(string, -n)
+                    string = rotate_right(string, n)
                 elif head == 'right':
                     n = list(getints(tail))[0]
-                    string = rotate_lr(string, n)
+                    string = rotate_left(string, n)
                 else:
                     x = getchars(tail)[0]
                     string = rotate_position(string, x)
@@ -83,7 +87,7 @@ def main(argv):
                 string = reverse(string, x, y)
             elif head == 'move':
                 x, y = getints(tail)
-                string = move(string, x, y)
+                string = move(string, y, x)
         print(''.join(string))
     return 0
 

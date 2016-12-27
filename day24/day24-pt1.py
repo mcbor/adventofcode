@@ -61,6 +61,7 @@ def main(argv):
         for p in permutations(range(1, max(locations.keys()) + 1)):
             steps = min(steps, sum(paths[(a, b)] for a, b in pairwise(chain([0], p))))
         print(steps)
+    return 0
             
 
 if __name__ == '__main__':

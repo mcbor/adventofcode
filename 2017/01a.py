@@ -22,8 +22,8 @@ def solve(captcha):
     """Solve captcha.
 
     :input: captcha string
-    :return: sum of all paired digits that match 
-    
+    :return: sum of all paired digits that match
+
     >>> solve('1122')
     3
     >>> solve('1111')
@@ -31,8 +31,7 @@ def solve(captcha):
     >>> solve('98769')
     9
     """
-    captcha = list(map(int, captcha))
-    return sum(x for n, x in enumerate(captcha) if x == captcha[(n+1) % len(captcha)])
+    return sum(int(x) for x, y in zip(captcha, captcha[1:] + captcha[0]) if x == y)
 
 
 def main(argv):

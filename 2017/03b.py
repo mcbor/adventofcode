@@ -44,7 +44,7 @@ from math import ceil, sqrt
 
 
 def spiral(n):
-    """Return Carthesian coordinates of for point n on a spiral
+    """Return Carthesian coordinates for point n on a spiral
     
     :n: spiral point
     :returns: Carthesian coordinate
@@ -102,10 +102,10 @@ def fill():
 
 
 def solve(limit):
-    """Calculate distance between square and the access port.
+    """Calculate first value written larger than limit.
 
     :input: limit
-    :return: last value written
+    :return: first value written larger than limit
 
     >>> solve(1)
     2

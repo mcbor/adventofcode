@@ -44,7 +44,7 @@ from math import ceil, sqrt
 
 
 def manhattan(p, q):
-    """Return manhattan distance between two points
+    """Return Manhattan distance between two points
     
     :p: 2-tuple
     :q: 2-tuple
@@ -53,7 +53,7 @@ def manhattan(p, q):
 
 
 def spiral(n):
-    """Return Carthesian coordinates of for point n on a spiral
+    """Return Carthesian coordinates for point n on a spiral
     
     :n: spiral point
     :returns: Carthesian coordinate

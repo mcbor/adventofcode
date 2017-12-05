@@ -19,6 +19,7 @@
 """
 
 import sys
+from blindspin import spinner
 
 
 def solve(jumplist):
@@ -33,12 +34,12 @@ def solve(jumplist):
     pc = 0
     steps = 0
 
-    while 0 <= pc < len(jumplist):
-        jump = jumplist[pc]
-        jumplist[pc] += 1 if jump < 3 else -1
-        pc += jump
-        steps += 1
-
+    with spinner():
+        while 0 <= pc < len(jumplist):
+            jump = jumplist[pc]
+            jumplist[pc] += 1 if jump < 3 else -1
+            pc += jump
+            steps += 1
     return steps
 
 

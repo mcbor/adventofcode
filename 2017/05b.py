@@ -3,7 +3,7 @@
 """
     05b.py
     ~~~~~~
-    Advent of Code 2017 - Day 4: A Maze of Twisty Trampolines, All Alike
+    Advent of Code 2017 - Day 5: A Maze of Twisty Trampolines, All Alike
     Part Two
 
     Now, the jumps are even stranger: after each jump, if the offset was three

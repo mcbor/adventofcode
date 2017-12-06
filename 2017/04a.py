@@ -40,6 +40,7 @@ def solve(passphrases):
     >>> solve('aa bb cc dd aaa')
     1
     """
+
     return sum(len(words) == len(set(words))
                for words in (passphrase.split()
                              for passphrase in passphrases.split('\n')))

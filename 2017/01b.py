@@ -37,7 +37,9 @@ def solve(captcha):
     4
     """
     a = len(captcha) // 2
-    return sum(int(x) for x, y in zip(captcha, captcha[a:] + captcha[:a]) if x == y)
+
+    return sum(int(x) for x, y in
+               zip(captcha, captcha[a:] + captcha[:a]) if x == y)
 
 
 def main(argv):

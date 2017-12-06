@@ -29,12 +29,16 @@ def solve(spreadsheet):
     9
     """
     chksum = 0
+
     for row in spreadsheet.split('\n'):
         numbers = [int(x) for x in row.split('\t')]
+
         for x, y in permutations(numbers, 2):
             quotient, remainder = divmod(x, y)
+
             if remainder == 0:
                 chksum += quotient
+
     return chksum
 
 

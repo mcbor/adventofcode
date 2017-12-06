@@ -45,7 +45,7 @@ from math import ceil, sqrt
 
 def spiral(n):
     """Return Carthesian coordinates for point n on a spiral
-    
+
     :n: spiral point
     :returns: Carthesian coordinate
 
@@ -65,14 +65,18 @@ def spiral(n):
     t = 2 * k + 1
     m = t**2
     t = t - 1
+
     if n >= m - t:
         return k - (m - n), -k
     m = m - t
+
     if n >= m - t:
         return -k, -k + (m - n)
     m = m - t
+
     if n >= m - t:
         return -k + (m - n), k
+
     return k, k - (m - n - t)
 
 
@@ -93,6 +97,7 @@ def fill():
     """
     memory = {(0, 0): 1}
     neighbors = list(product((-1, 0, 1), repeat=2))
+
     for n in count(1):
         x, y = spiral(n)
         coord = [(x + nb[0], y + nb[1]) for nb in neighbors]
@@ -116,6 +121,7 @@ def solve(limit):
     >>> solve(1024)
     1968
     """
+
     for n in fill():
         if n > limit:
             return n

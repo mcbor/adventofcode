@@ -29,9 +29,11 @@ def solve(spreadsheet):
     18
     """
     chksum = 0
+
     for row in spreadsheet.split('\n'):
         numbers = [int(x) for x in row.split('\t')]
         chksum += max(numbers) - min(numbers)
+
     return chksum
 
 

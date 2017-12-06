@@ -45,16 +45,17 @@ from math import ceil, sqrt
 
 def manhattan(p, q):
     """Return Manhattan distance between two points
-    
+
     :p: 2-tuple
     :q: 2-tuple
     :returns: Manhattan distance between p and q"""
+
     return int(abs(p[0] - q[0]) + abs(p[1] - q[1]))
 
 
 def spiral(n):
     """Return Carthesian coordinates for point n on a spiral
-    
+
     :n: spiral point
     :returns: Carthesian coordinate
 
@@ -74,14 +75,18 @@ def spiral(n):
     t = 2 * k + 1
     m = t**2
     t = t - 1
+
     if n >= m - t:
         return k - (m - n), -k
     m = m - t
+
     if n >= m - t:
         return -k, -k + (m - n)
     m = m - t
+
     if n >= m - t:
         return -k + (m - n), k
+
     return k, k - (m - n - t)
 
 
@@ -100,6 +105,7 @@ def solve(n):
     >>> solve(1024)
     31
     """
+
     return manhattan((0, 0), spiral(n))
 
 

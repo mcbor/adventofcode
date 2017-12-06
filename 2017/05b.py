@@ -40,6 +40,7 @@ def solve(jumplist):
             jumplist[pc] += 1 if jump < 3 else -1
             pc += jump
             steps += 1
+
     return steps
 
 

@@ -31,7 +31,9 @@ def solve(captcha):
     >>> solve('98769')
     9
     """
-    return sum(int(x) for x, y in zip(captcha, captcha[1:] + captcha[0]) if x == y)
+
+    return sum(int(x) for x, y in
+               zip(captcha, captcha[1:] + captcha[0]) if x == y)
 
 
 def main(argv):

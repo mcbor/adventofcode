@@ -87,17 +87,11 @@ class Node(object):
         self.children = children
 
 
-def solve(tower):
-    """Find the bottom program (root) in the tower of programs
+def parse_input(tower):
+    """Parse a tower input file into a dict of Node objects
 
-    :tower: list of programs with their weight and balancing programs,
-            if holding a disc
-    :return: bottom program
-
-    >>> solve("pbga (66)\\nxhth (57)\\nebii (61)\\nhavc (66)\\nktlj (57)\\nfwft (72) -> ktlj, cntj, xhth\\nqoyq (66)\\npadx (45) -> pbga, havc, qoyq\\ntknk (41) -> ugml, padx, fwft\\njptl (61)\\nugml (68) -> gyxo, ebii, jptl\\ngyxo (61)\\ncntj (57)")
-    'tknk'
-    """
-
+    :tower: tower input file
+    :returns: dict of Node objects with name as key"""
     nodes = {}
 
     # parse all input nodes
@@ -116,11 +110,37 @@ def solve(tower):
         for child in node.children:
             child.parent = node
 
+    return nodes
+
+
+def find_root(nodes):
+    """Find the root of the tree
+
+    :nodes: dict of Node objects
+    :return: root Node"""
+
     # pick a node and follow its parent up until we got one without a parent
-    root = nodes[list(nodes)[0]]
+    root = next(iter(nodes.values()))
 
     while root.parent:
         root = root.parent
+
+    return root
+
+
+def solve(tower):
+    """Find the bottom program (root) in the tower of programs
+
+    :tower: list of programs with their weight and balancing programs,
+            if holding a disc
+    :return: bottom program
+
+    >>> solve("pbga (66)\\nxhth (57)\\nebii (61)\\nhavc (66)\\nktlj (57)\\nfwft (72) -> ktlj, cntj, xhth\\nqoyq (66)\\npadx (45) -> pbga, havc, qoyq\\ntknk (41) -> ugml, padx, fwft\\njptl (61)\\nugml (68) -> gyxo, ebii, jptl\\ngyxo (61)\\ncntj (57)")
+    'tknk'
+    """
+
+    nodes = parse_input(tower)
+    root = find_root(nodes)
 
     return root.name
 

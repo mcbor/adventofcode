@@ -8,16 +8,16 @@
 
     The programs explain the situation: they can't get down. Rather, they could
     get down, if they weren't expending all of their energy trying to keep the
-    tower balanced. Apparently, one program has the wrong weight, and until it's
-    fixed, they're stuck here.
+    tower balanced. Apparently, one program has the wrong weight, and until
+    it's fixed, they're stuck here.
 
     For any program holding a disc, each program standing on that disc forms a
     sub-tower. Each of those sub-towers are supposed to be the same weight, or
     the disc itself isn't balanced. The weight of a tower is the sum of the
     weights of the programs in that tower.
 
-    In the example before, this means that for ugml's disc to be balanced, gyxo,
-    ebii, and jptl must all have the same weight, and they do: 61.
+    In the example before, this means that for ugml's disc to be balanced,
+    gyxo, ebii, and jptl must all have the same weight, and they do: 61.
 
     However, for tknk to be balanced, each of the programs standing on its disc
     and all programs above it must each match. This means that the following
@@ -28,9 +28,9 @@
     fwft + (ktlj + cntj + xhth) = 72 + (57 + 57 + 57) = 243
 
     As you can see, tknk's disc is unbalanced: ugml's stack is heavier than the
-    other two. Even though the nodes above ugml are balanced, ugml itself is too
-    heavy: it needs to be 8 units lighter for its stack to weigh 243 and keep
-    the towers balanced. If this change were made, its weight would be 60.
+    other two. Even though the nodes above ugml are balanced, ugml itself is
+    too heavy: it needs to be 8 units lighter for its stack to weigh 243 and
+    keep the towers balanced. If this change were made, its weight would be 60.
 
     Given that exactly one program is the wrong weight, what would its weight
     need to be to balance the entire tower?
@@ -63,17 +63,11 @@ class Node(object):
         return f"{self.name} ({self.weight})"
 
 
-def solve(tower):
-    """Figure out the correct weight.
+def parse_input(tower):
+    """Parse a tower input file into a dict of Node objects
 
-    :tower: list of programs with their weight and balancing programs,
-            if holding a disc
-    :return: the correct weight
-
-    >>> solve("pbga (66)\\nxhth (57)\\nebii (61)\\nhavc (66)\\nktlj (57)\\nfwft (72) -> ktlj, cntj, xhth\\nqoyq (66)\\npadx (45) -> pbga, havc, qoyq\\ntknk (41) -> ugml, padx, fwft\\njptl (61)\\nugml (68) -> gyxo, ebii, jptl\\ngyxo (61)\\ncntj (57)")
-    60
-    """
-
+    :tower: tower input file
+    :returns: dict of Node objects with name as key"""
     nodes = {}
 
     # parse all input nodes
@@ -92,20 +86,47 @@ def solve(tower):
         for child in node.children:
             child.parent = node
 
+    return nodes
+
+
+def find_root(nodes):
+    """Find the root of the tree
+
+    :nodes: dict of Node objects
+    :return: root Node"""
+
     # pick a node and follow its parent up until we got one without a parent
-    root = nodes[list(nodes)[0]]
+    root = next(iter(nodes.values()))
 
     while root.parent:
         root = root.parent
 
+    return root
+
+
+def solve(tower):
+    """Figure out the correct weight.
+
+    :tower: list of programs with their weight and balancing programs,
+            if holding a disc
+    :return: the correct weight
+
+    >>> solve("pbga (66)\\nxhth (57)\\nebii (61)\\nhavc (66)\\nktlj (57)\\nfwft (72) -> ktlj, cntj, xhth\\nqoyq (66)\\npadx (45) -> pbga, havc, qoyq\\ntknk (41) -> ugml, padx, fwft\\njptl (61)\\nugml (68) -> gyxo, ebii, jptl\\ngyxo (61)\\ncntj (57)")
+    60
+    """
+
+    nodes = parse_input(tower)
+
     # start at the root
-    node = root
+    node = find_root(nodes)
 
     while True:
         # find the unbalanced child and go from there
+
         for child in node.children:
             if not child.is_balanced():
                 node = child
+
                 break
         else:
             # we get here if all children's children of this node are balanced

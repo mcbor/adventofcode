@@ -131,7 +131,8 @@ def main(argv):
     if len(argv) == 2:
         print(solve(int(argv[1])))
     else:
-        print("Usage: {} LIMIT".format(argv[0]))
+        sys.stderr.write('reading from stdin...\n')
+        print(solve(int(sys.stdin.read().strip())))
 
 
 if __name__ == "__main__":

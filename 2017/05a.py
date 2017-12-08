@@ -51,10 +51,10 @@ import sys
 from blindspin import spinner
 
 
-def solve(jumplist):
+def solve(program):
     """Calculate number of steps needed to exit the maze
 
-    :jumplist: list of jump instructions
+    :program: list of jump instructions
     :return: number of steps to jump out of the list
 
     >>> solve([0, 3, 0, 1, -3])
@@ -62,11 +62,11 @@ def solve(jumplist):
     """
     pc = 0
     steps = 0
-
+    memory = list(program)
     with spinner():
-        while 0 <= pc < len(jumplist):
-            jump = jumplist[pc]
-            jumplist[pc] += 1
+        while 0 <= pc < len(memory):
+            jump = memory[pc]
+            memory[pc] += 1
             pc += jump
             steps += 1
 
@@ -79,7 +79,7 @@ def main(argv):
     else:
         sys.stderr.write('reading from stdin...\n')
         f = sys.stdin
-    print(solve([int(x) for x in f.read().strip().split('\n')]))
+    print(solve((int(x) for x in f.read().strip().split('\n'))))
 
 
 if __name__ == "__main__":

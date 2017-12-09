@@ -77,25 +77,37 @@ import sys
 
 
 def garbage(stream):
-    # skip stream over garbage
+    """Skip over any garbage in the stream, properly handling escaped (!)
+    characters
+
+    :stream: stream of characters
+    """
+
     for c in stream:
         if c == '!':
-            # skip the next char
+            # escape, skip the next char
             next(stream)
         elif c == '>':
-            # end of garbage stream
             return
 
 
-def group(stream, level, score):
-    score.append(level)
+def group(stream, level):
+    """Return total score of this subgroup
+
+    :stream: stream of character
+    :level: current level
+    :returns: total score of this subgroup
+    """
+    score = level
+
     for c in stream:
         if c == '}':
-            return level
+            return score
         elif c == '<':
             garbage(stream)
         elif c == '{':
-            group(stream, level + 1, score)
+            score += group(stream, level + 1)
+
     return score
 
 
@@ -122,7 +134,8 @@ def solve(stream):
     >>> solve('{{<a!>},{<a!>},{<a!>},{<ab>}}')
     3
     """
-    return sum(group(iter(stream), 0, []))
+
+    return group(iter(stream), 0)
 
 
 def main(argv):

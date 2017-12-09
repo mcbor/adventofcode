@@ -31,22 +31,30 @@ import sys
 
 
 def garbage(stream):
-    # skip stream over garbage
+    """Skip over any garbage in the stream, properly handling escaped (!)
+    characters, and counting all characters.
+
+    :stream: stream of characters
+    :returns: number of garbage characters
+    """
     count = 0
 
     for c in stream:
         if c == '!':
-            # skip the next char
+            # escape, skip the next char
             next(stream)
         elif c == '>':
-            # end of garbage stream
-
             return count
         else:
             count += 1
 
 
 def group(stream):
+    """Return total number of garbage characters in this subgroup
+
+    :stream: stream of character
+    :returns: total number of garbage characters
+    """
     count = 0
 
     for c in stream:
@@ -61,10 +69,10 @@ def group(stream):
 
 
 def solve(stream):
-    """Total score for all groups in the stream.
+    """Count total number of garbage characters in the stream.
 
     :stream: stream of characters
-    :return: total score
+    :return: total number of garbage characters
 
     >>> solve('{<>}')
     0

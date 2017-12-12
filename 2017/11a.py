@@ -48,6 +48,7 @@ from functools import reduce
 
 class Hex(object):
     """Point on a hexagonal grid."""
+
     def __init__(self, q, r, s=None):
         """Construct new point on hex grid, either using cube (x,y,z) or axial
         coordinates (q,r).
@@ -75,12 +76,12 @@ class Hex(object):
 
 
 directions = {
-        'n': Hex(0, -1),
-        'ne': Hex(1, -1),
-        'se': Hex(1, 0),
-        's': Hex(0, 1),
-        'sw': Hex(-1, 1),
-        'nw': Hex(-1, 0)}
+    'n': Hex(0, -1),
+    'ne': Hex(1, -1),
+    'se': Hex(1, 0),
+    's': Hex(0, 1),
+    'sw': Hex(-1, 1),
+    'nw': Hex(-1, 0)}
 
 
 def solve(steps):
@@ -110,7 +111,7 @@ def main(argv):
     else:
         sys.stderr.write('reading from stdin...\n')
         f = sys.stdin
-    print(solve(( f.read().strip())))
+    print(solve((f.read().strip())))
 
 
 if __name__ == "__main__":

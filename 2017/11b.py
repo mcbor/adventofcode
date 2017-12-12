@@ -13,12 +13,11 @@
 """
 
 import sys
-import operator
-from functools import reduce
 
 
 class Hex(object):
     """Point on a hexagonal grid."""
+
     def __init__(self, q, r, s=None):
         """Construct new point on hex grid, either using cube (x,y,z) or axial
         coordinates (q,r).
@@ -46,13 +45,14 @@ class Hex(object):
 
 
 directions = {
-        'n': Hex(0, -1),
-        'ne': Hex(1, -1),
-        'se': Hex(1, 0),
-        's': Hex(0, 1),
-        'sw': Hex(-1, 1),
-        'nw': Hex(-1, 0)}
-        
+    'n': Hex(0, -1),
+    'ne': Hex(1, -1),
+    'se': Hex(1, 0),
+    's': Hex(0, 1),
+    'sw': Hex(-1, 1),
+    'nw': Hex(-1, 0)}
+
+
 def solve(steps):
     """Return distance from the origin after following the path given in steps.
 
@@ -70,10 +70,12 @@ def solve(steps):
     """
     steps = [directions[s] for s in steps.split(',')]
     furthest = 0
-    child = Hex(0,0)
+    child = Hex(0, 0)
+
     for step in steps:
         child += step
         furthest = max(furthest, child.length)
+
     return furthest
 
 
@@ -83,7 +85,7 @@ def main(argv):
     else:
         sys.stderr.write('reading from stdin...\n')
         f = sys.stdin
-    print(solve(( f.read().strip())))
+    print(solve((f.read().strip())))
 
 
 if __name__ == "__main__":

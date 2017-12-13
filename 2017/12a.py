@@ -83,10 +83,7 @@ def solve(pipes):
 
     for line in pipes.split('\n'):
         pid, _, *tail = line.split()
-
-        for n in tail:
-            n = n.strip(', ')
-            graph[pid].add(n)
+        graph[pid].update(n.strip(', ') for n in tail)
 
     visited = set()
     stack = ['0']

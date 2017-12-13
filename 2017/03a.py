@@ -54,10 +54,10 @@ def manhattan(p, q):
 
 
 def spiral(n):
-    """Return Carthesian coordinates for point n on a spiral
+    """Return Cartesian coordinates for point n on a spiral
 
     :n: spiral point
-    :returns: Carthesian coordinate
+    :returns: Cartesian coordinate
 
     >>> spiral(1)
     (0, 0)

@@ -32,7 +32,7 @@ def solve(pipes):
     """Return number of groups.
 
     :pipes: string of pipes separated by newlines.
-    :return: number of proframs that contain program ID 0
+    :return: number of program that contain program ID 0
 
     >>> solve('''0 <-> 2
     ... 1 <-> 1

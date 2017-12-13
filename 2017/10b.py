@@ -92,13 +92,13 @@ def grouper(iterable, n, fillvalue=None):
 
 
 def circulair(lst, start, length):
-    """Return a circulair (i.e. wrapping around) slice of lst of length
+    """Return a circular (i.e. wrapping around) slice of lst of length
     'length', starting at 'start'.
 
     :lst: source list
     :start: start index of the slice
-    :lenght: length of the slice
-    :returns: circulair slice of lst
+    :length: length of the slice
+    :returns: circular slice of lst
     """
     it = cycle(lst)
     next(islice(it, start, start), None)

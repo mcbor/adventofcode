@@ -64,7 +64,7 @@ def solve(banks):
     """Calculate number of steps needed to exit the maze
 
     :banks: list of blocks in each bank
-    :return: number of redistribtion cycles to loop
+    :return: number of redistribution cycles to loop
 
     >>> solve([0, 2, 7, 0])
     5

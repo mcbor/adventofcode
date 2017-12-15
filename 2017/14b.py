@@ -90,14 +90,14 @@ def knothash(key):
     :key: input data string
     :returns: Knot Hash in dense hash form
 
-    >>> knothash('')
-    'a2582a3a0e66e6e86e3812dcb672a272'
-    >>> knothash('AoC 2017')
-    '33efeb34ea91902bb2f59c9920caa6cd'
-    >>> knothash('1,2,3')
-    '3efbe78a8d82f29979031a4aa0b16a9d'
-    >>> knothash('1,2,4')
-    '63960835bcdc130f0b66d7ff4f6a5a8e'
+    >>> hex(knothash(''))
+    '0xa2582a3a0e66e6e86e3812dcb672a272'
+    >>> hex(knothash('AoC 2017'))
+    '0x33efeb34ea91902bb2f59c9920caa6cd'
+    >>> hex(knothash('1,2,3'))
+    '0x3efbe78a8d82f29979031a4aa0b16a9d'
+    >>> hex(knothash('1,2,4'))
+    '0x63960835bcdc130f0b66d7ff4f6a5a8e'
     """
     string = [ord(c) for c in key] + SUFFIX
     knots = list(range(MARKS))
@@ -111,12 +111,12 @@ def knothash(key):
             finger = (finger + length + skip) % MARKS
             skip += 1
     blocks = grouper(knots, 16)
-    dense_hash = []
+    dense_hash = 0
 
     for block in blocks:
-        dense_hash.append(reduce(xor, block))
+        dense_hash = (dense_hash << 8) | reduce(xor, block)
 
-    return ''.join(f"{x:02x}" for x in dense_hash)
+    return dense_hash
 
 
 def solve(key):
@@ -129,7 +129,7 @@ def solve(key):
     1242
     """
     hashes = (knothash(f"{key}-{row}") for row in range(128))
-    grid = (f"{int(h, 16):128b}" for h in hashes)
+    grid = (f"{h:0128b}" for h in hashes)
     squares = set()
 
     for y, row in enumerate(grid):
